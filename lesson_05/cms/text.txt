@@ -1,0 +1,222 @@
+// const createRow = (obj) => {
+//    const row = document.createElement('tr');
+//    const cell1 = document.createElement('td');
+//    cell1.className = 'table__cell';
+//    cell1.textContent = obj.id;
+
+//    const cell2 = document.createElement('td');
+//    cell2.className = 'table__cell table__cell_left table__cell_name';
+//    cell2.setAttribute('data-id', obj.id);
+//    const span = document.createElement('span');
+//    span.className = 'table__cell_id';
+//    span.textContent = `id: ${obj.id}`;
+//    cell2.appendChild(span);
+//    cell2.innerHTML += '"Телевизор  "DEXP""';
+
+//    const cell3 = document.createElement('td');
+//    cell3.className = 'table__cell table__cell_left';
+//    cell3.textContent = obj.category;
+
+//    const cell4 = document.createElement('td');
+//    cell4.className = 'table__cell';
+//    cell4.textContent = obj.unit;
+
+//    const cell5 = document.createElement('td');
+//    cell5.className = 'table__cell';
+//    cell5.textContent = obj.quantity;
+
+//    const cell6 = document.createElement('td');
+//    cell6.className = 'table__cell';
+//    cell6.textContent = obj.price;
+
+//    const cell7 = document.createElement('td');
+//    cell7.className = 'table__cell';
+//    cell7.textContent = obj.totalPrice;
+
+//    const cell8 = document.createElement('td');
+//    cell8.className = 'table__cell table__cell_btn-wrapper';
+//    const btn1 = document.createElement('button');
+//    btn1.className = 'table__btn table__btn_pic';
+//    const btn2 = document.createElement('button');
+//    btn2.className = 'table__btn table__btn_edit';
+//    const btn3 = document.createElement('button');
+//    btn3.className = 'table__btn table__btn_del';
+    
+//    cell8.appendChild(btn1);
+//    cell8.appendChild(btn2);
+//    cell8.appendChild(btn3);
+
+//    row.appendChild(cell1);
+//    row.appendChild(cell2);
+//    row.appendChild(cell3);
+//    row.appendChild(cell4);
+//    row.appendChild(cell5);
+//    row.appendChild(cell6);
+//    row.appendChild(cell7);
+//    row.appendChild(cell8);
+
+//    return row;
+// }
+
+// // const renderGoods = (array) => {
+// //    const table = document.querySelector('.table__header-row');
+// //    for (let obj of array) {
+// //       const row = createRow(obj);
+// //       table.appendChild(row);
+// //    }
+// // }
+
+const goods1 = [
+    {
+    "id": 1,
+    "title": "Смартфон Xiaomi 11T 8/128GB",
+    "price": 27000,
+    "description": "Смартфон Xiaomi 11T – это представитель флагманской линейки, выпущенной во второй половине 2021 года. И он полностью соответствует такому позиционированию, предоставляя своим обладателям возможность пользоваться отличными камерами, ни в чем себя не ограничивать при запуске игр и других требовательных приложений.",
+    "category": "mobile-phone",
+    "discont": false,
+    "count": 3,
+    "units": "шт",
+    "images": {
+        "small": "img/smrtxiaomi11t-m.jpg",
+        "big": "img/smrtxiaomi11t-b.jpg"
+    }
+},
+{
+    "id": 2,
+    "title": "Радиоуправляемый автомобиль Cheetan",
+    "price": 4000,
+    "description": "Внедорожник на дистанционном управлении. Скорость 25км/ч. Возраст 7 - 14 лет",
+    "category": "toys",
+    "discont": 5,
+    "count": 1,
+    "units": "шт",
+    "images": {
+        "small": "img/cheetancar-m.jpg",
+        "big": "img/cheetancar-b.jpg"
+    }
+},
+{
+    "id": 3,
+    "title": "ТВ приставка MECOOL KI",
+    "price": 12400,
+    "description": "Всего лишь один шаг сделает ваш телевизор умным, Быстрый и умный MECOOL KI PRO, прекрасно спроектированный, сочетает в себе прочный процессор Cortex-A53 с чипом Amlogic S905D",
+    "category": "tv-box",
+    "discont": 15,
+    "count": 4,
+    "units": "шт",
+    "images": {
+        "small": "img/tvboxmecool-m.jpg",
+        "big": "img/tvboxmecool-b.jpg"
+    }
+},
+{
+    "id": 4,
+    "title": "Витая пара PROConnect 01-0043-3-25",
+    "price": 22,
+    "description": "Витая пара Proconnect 01-0043-3-25 является сетевым кабелем с 4 парами проводов типа UTP, в качестве проводника в которых используется алюминий, плакированный медью CCA. Такая неэкранированная витая пара с одножильными проводами диаметром 0.50 мм широко применяется в процессе сетевых монтажных работ. С ее помощью вы сможете обеспечить развертывание локальной сети в домашних условиях или на предприятии, объединить все необходимое вам оборудование в единую сеть.",
+    "category": "cables",
+    "discont": false,
+    "count": 420,
+    "units": "v",
+    "images": {
+        "small": "img/lan_proconnect43-3-25.jpg",
+        "big": "img/lan_proconnect43-3-25-b.jpg"
+    }
+}
+];
+
+renderGoods(goods1);
+
+function createRow(obj) {
+  // Создаем элемент <tr>
+  var row = document.createElement('tr');
+  
+  // Добавляем класс "table__cell" к каждой ячейке
+  var cellClass = 'table__cell';
+  
+  // Создаем ячейку для номера
+  var cellNumber = document.createElement('td');
+  cellNumber.className = cellClass;
+  cellNumber.textContent = '1';
+  
+  // Создаем ячейку для названия
+  var cellName = document.createElement('td');
+  cellName.className = cellClass + ' ' + 'table__cell_left' + ' ' + 'table__cell_name';
+  cellName.dataset.id = obj.id;
+  cellName.innerHTML = '<span class="table__cell-id">' + 'id: ' + obj.id + '</span>' + obj.name;
+  
+  // Создаем ячейку для категории
+  var cellCategory = document.createElement('td');
+  cellCategory.className = cellClass + ' ' + 'table__cell_left';
+  cellCategory.textContent = obj.category;
+  
+  // Создаем ячейку для единицы измерения
+  var cellUnit = document.createElement('td');
+  cellUnit.className = cellClass;
+  cellUnit.textContent = 'шт';
+  
+  // Создаем ячейку для количества
+  var cellQuantity = document.createElement('td');
+  cellQuantity.className = cellClass;
+  cellQuantity.textContent = obj.quantity;
+  
+  // Создаем ячейку для цены
+  var cellPrice = document.createElement('td');
+  cellPrice.className = cellClass;
+  cellPrice.textContent = '$' + obj.price;
+  
+  // Создаем ячейку для общей стоимости
+  var cellTotal = document.createElement('td');
+  cellTotal.className = cellClass;
+  cellTotal.textContent = '$' + obj.total;
+  
+  // Создаем ячейку с кнопками
+  var cellButtons = document.createElement('td');
+  cellButtons.className = cellClass + ' ' + 'table__cell_btn-wrapper';
+  
+  // Создаем кнопку "Просмотр"
+  var btnView = document.createElement('button');
+  btnView.className = 'table__btn table__btn_pic';
+  cellButtons.appendChild(btnView);
+  
+  // Создаем кнопку "Редактировать"
+  var btnEdit = document.createElement('button');
+  btnEdit.className = 'table__btn table__btn_edit';
+  cellButtons.appendChild(btnEdit);
+  
+  // Создаем кнопку "Удалить"
+  var btnDelete = document.createElement('button');
+  btnDelete.className = 'table__btn table__btn_del';
+  cellButtons.appendChild(btnDelete);
+  
+  // Добавляем все ячейки в строку
+  row.appendChild(cellNumber);
+  row.appendChild(cellName);
+  row.appendChild(cellCategory);
+  row.appendChild(cellUnit);
+  row.appendChild(cellQuantity);
+  row.appendChild(cellPrice);
+  row.appendChild(cellTotal);
+  row.appendChild(cellButtons);
+  
+  // Возвращаем сформированную строку
+  return row;
+}
+
+function renderGoods(arr) {
+  // Получаем таблицу по ее id
+  var table = document.getElementById('goodsTable');
+  
+  // Очищаем таблицу
+  table.innerHTML = '';
+  
+  // Перебираем массив с объектами
+  for (var i = 0; i < arr.length; i++) {
+    // Создаем строку на основе каждого объекта
+    var row = createRow(arr[i]);
+    
+    // Вставляем строку в таблицу
+    table.appendChild(row);
+  }
+}
+
