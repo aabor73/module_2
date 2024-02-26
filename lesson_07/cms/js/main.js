@@ -32,10 +32,11 @@ const goods = [
   price: 12400,
   total: 49600
   },
-  ];
-
-const createRow = (row) => {
-    const tr = document.createElement('tr');    
+];
+  
+const createRow = row => {
+  const tr = document.createElement('tr');   
+  
     tr.innerHTML = `
     <td class="table__cell">${row.num}</td>
     <td class="table__cell table__cell_left table__cell_name" data-id="${row.id}">
@@ -55,21 +56,21 @@ const createRow = (row) => {
 return tr;
 }
 
-const renderGoods = (data) => {
+const renderGoods = data => {
     const table = document.querySelector('.table');
     data.forEach(item => {
     const tr = createRow(item);
-    table.appendChild(tr);
-});
+    table.appendChild(tr);      
+    });  
 };
 
 renderGoods(goods);
 
 // Генерация случайного id и заполнение span с классом vendor-code__id:
-function generateRandomId() {
+const generateRandomId = () => {
   const randomId = Math.floor(Math.random() * 100000000000000);
   const vendorCodeId = document.querySelector('.vendor-code__id');
-  vendorCodeId.textContent = randomId;  
+    vendorCodeId.textContent = randomId;
 };
 
 // === Modal window open/close ===
@@ -102,53 +103,75 @@ const btnDelGoods = document.querySelectorAll('.table__btn_del');
 
 // Используем метод forEach(), которая позволяет применить
 // ко всем кнопкам addEventListener
-const delGoods = () => {
+
   btnDelGoods.forEach(btn => { 
     btn.addEventListener('click', e => {
       if (e.target.closest('tr')) { // проверяем есть ли элемент tr
         e.target.closest('tr').remove(); // удаляем строку tr из вёрстки
-        goods.splice(0, 1); // удаляем первый элемент из массива goods
+        goods.splice(0, 1); // удаляем первый элемент из массива goods        
         console.log("🚀 ~ goods:", goods) // выводим массив goods в консоль
       }      
     });    
   });
-};
-
-delGoods();
 
 // ===== Функция для формы =====
-const form = document.querySelector('.modal__form');
-const checkbox = document.querySelector('.modal__checkbox');
-const discountInput = document.querySelector('.modal__input_discount');
+// const form = document.querySelector('.modal__form');
+// const checkbox = document.querySelector('.modal__checkbox');
+// const discountInput = document.querySelector('.modal__input_discount');
 
-checkbox.addEventListener('change', () => {
-  if (checkbox.checked) {
-    discountInput.disabled = false;
-  } else {
-    discountInput.value = '';
-    discountInput.disabled = true;
-  }
-});
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  const title = e.target.elements.name.value;
-  const category = e.target.elements.category.value;
-  const unit = e.target.elements.units.value;
-  const count = e.target.elements.count.value;
-  const price = e.target.elements.price.value;
-  const total = e.target.elements.total.value;
+// checkbox.addEventListener('change', () => {
+//   if (checkbox.checked) {
+//     discountInput.disabled = false;
+//   } else {
+//     discountInput.value = '';
+//     discountInput.disabled = true;
+//   }
+// });
 
-  const newGoods = {
-    title,
-    category,
-    unit,
-    count,
-    price,
-    total
-  };
-  goods.push(newGoods);
-  renderGoods(goods);  
-  overlay.classList.remove('active');
-  form.reset();    
-});
+// form.addEventListener('submit', e => {
+//   e.preventDefault();
+//   const title = e.target.elements.name.value;
+//   const category = e.target.elements.category.value;
+//   const unit = e.target.elements.units.value;
+//   const count = e.target.elements.count.value;
+//   const price = e.target.elements.price.value;
+//   const total = e.target.elements.total.value;
+
+//   const newGoods = {
+//     title,
+//     category,
+//     unit,
+//     count,
+//     price,
+//     total
+//   };
+//   goods.push(newGoods);
+//   renderGoods(goods);
+//   overlay.classList.remove('active');
+//   form.reset();
+// });
+
+
+function serializeForm(formNode) {
+  const { elements } = formNode
+  const data = Array.from(elements)
+    .filter((item) => !!item.name)
+    .map((element) => {
+      const { name, value } = element      
+
+      return { name, value }
+    })
+
+  console.log(data)
+}
+
+function handleFormSubmit(event) {  
+  event.preventDefault()
+  serializeForm(form)  
+}
+
+const form = document.querySelector('.modal__form')
+form.addEventListener('submit', handleFormSubmit)
+
+
 
